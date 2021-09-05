@@ -62,12 +62,21 @@ function showQuestion() {
 }
 
 function answer(selection) {
-    console.log('Selected answer is', selection)
-    if(selection == "answer_3"){
-        document.getElementById(selection).style = 'background-color: green';
-        
+    let question = questions[currentQuestion];
+    console.log('Selected answer is', selection);
+    let selectedQuestionNumber = selection.slice(-1);
+    console.log('selectedQuestionNumber is', selectedQuestionNumber)
+    console.log('Current question is', question['right_answer']);
+
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
+    if (selectedQuestionNumber == question['right_answer']) {
+        document.getElementById(selection).parentNode.classList.add('bg-success');
+        console.log('richtige Antwort!!!')
     } else {
-        document.getElementById(selection).style = 'background-color: red';
-        
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        console.log('falsche Antwort!!!')
     }
+    document.getElementById('next-button').disabled = false;
 }
